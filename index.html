@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- DATA TABLES -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+     <!-- Bootstrap JS -->
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+</head>
+<body>
+    <div id="content"></div>
+        <table id="dataTable" class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Selecionado</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            <!-- Os itens da tabela serão adicionados dinamicamente aqui pelo JavaScript -->
+                
+            </tbody>
+      </table>
+    </div>
+
+      <script>
+
+        var data = [];
+        for (var i = 1; i <= 40; i++) {
+            data.push(
+                { id: i,
+                  name: "Item " + i,
+                  description: "Description " + i,
+                  tipo: "<input type='checkbox'>"
+                }
+                );
+        }
+
+        var tableBody = document.getElementById("tableBody");
+
+        function displayData(lista){
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for(var i = 0; i < lista.length; i++){
+                
+                var row = document.createElement("tr");
+
+                var idCell = document.createElement("th");
+                idCell.setAttribute("scope", "row");
+                idCell.textContent = lista[i].id;
+
+                var nameCell = document.createElement("td");
+                nameCell.textContent = lista[i].name;
+
+                var descriptionCell = document.createElement("td");
+                descriptionCell.textContent = lista[i].description;
+
+                var tipoCell = document.createElement("td");
+                tipoCell.innerHTML = lista[i].tipo;
+
+               
+                row.appendChild(idCell);
+                row.appendChild(nameCell);
+                row.appendChild(descriptionCell);
+                row.appendChild(tipoCell);
+
+                tableBody.appendChild(row);
+
+            }
+
+        }
+
+        displayData(data);
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+
+      </script>
+    
+</body>
+</html>
